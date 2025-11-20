@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Insights</title>
+  <link rel="stylesheet" href="../styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<h2>Insights</h2>
+
+<canvas id="chart"></canvas>
+
+<script src="../app.js"></script>
+<script>
+  const income = loadData("income", { total: 0 }).total;
+  const expenses = loadData("budget", { totalExpenses: 0 }).totalExpenses;
+
+  new Chart(document.getElementById("chart"), {
+    type: "doughnut",
+    data: {
+      labels: ["Income", "Expenses"],
+      datasets: [{
+        data: [income, expenses],
+      }]
+    }
+  });
+</script>
+
+</body>
+</html>
