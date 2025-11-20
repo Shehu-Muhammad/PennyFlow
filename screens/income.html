@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Income</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<h2>Income</h2>
+
+<input id="incomeInput" type="number" placeholder="Monthly income">
+<button onclick="saveIncome()">Save Income</button>
+
+<script src="../app.js"></script>
+<script>
+  function saveIncome() {
+    const value = parseFloat(document.getElementById("incomeInput").value) || 0;
+    saveData("income", { total: value });
+    alert("Income saved!");
+  }
+</script>
+
+</body>
+</html>
