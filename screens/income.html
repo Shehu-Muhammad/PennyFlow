@@ -6,19 +6,59 @@
 </head>
 <body>
 
-<h2>Income</h2>
+<h2>Income Sources</h2>
 
-<input id="incomeInput" type="number" placeholder="Monthly income">
-<button onclick="saveIncome()">Save Income</button>
+<div id="incomeList"></div>
+
+<input id="incomeName" placeholder="Name (e.g., Job, Gig, Tips)">
+<input id="incomeAmount" type="number" placeholder="Amount">
+<button onclick="addIncome()">Add</button>
+
+<button onclick="clearIncome()">Clear All Income</button>
 
 <script src="../app.js"></script>
 <script>
-  function saveIncome() {
-    const value = parseFloat(document.getElementById("incomeInput").value) || 0;
-    saveData("income", { total: value });
-    alert("Income saved!");
+  function renderIncome() {
+    const data = loadData("income", []);
+    const container = document.getElementById("incomeList");
+    container.innerHTML = "";
+
+    data.forEach((inc, index) => {
+      const div = document.createElement("div");
+      div.className = "row";
+      div.innerHTML = `${inc.name}: $${inc.amount}
+        <button onclick="removeIncome(${index})">X</button>`;
+      container.appendChild(div);
+    });
   }
+
+  function addIncome() {
+    const name = incomeName.value;
+    const amount = parseFloat(incomeAmount.value);
+    if (!name || !amount) return;
+    
+    const income = loadData("income", []);
+    income.push({ name, amount });
+    saveData("income", income);
+
+    renderIncome();
+  }
+
+  function removeIncome(i) {
+    const income = loadData("income", []);
+    income.splice(i, 1);
+    saveData("income", income);
+    renderIncome();
+  }
+
+  function clearIncome() {
+    saveData("income", []);
+    renderIncome();
+  }
+
+  renderIncome();
 </script>
+
 
 </body>
 </html>
