@@ -1,3 +1,20 @@
+/* Mobile layout */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  input, select, button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  nav a {
+    display: block;
+    margin-bottom: 10px;
+  }
+}
+
 body {
   font-family: Arial, sans-serif;
   background: #f4f4f4;
@@ -32,3 +49,4 @@ button {
   border-radius: 8px;
   cursor: pointer;
 }
+
