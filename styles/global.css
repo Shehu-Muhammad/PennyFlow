@@ -1,0 +1,17 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  margin: 0;
+  margin-left: 15px;
+  padding: 20px;
+  transition: background 0.3s, color 0.3s;
+}
+
+h1, h2 {
+  margin-bottom: 15px;
+}
+
+input, button, select {
+  padding: 10px;
+  margin-bottom: 10px;
+}
