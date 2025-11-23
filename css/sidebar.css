@@ -1,0 +1,8 @@
+.sidebar{
+  position:fixed;top:0;left:-240px;width:240px;height:100%;background:#111;color:#fff;padding:20px;transition:left .25s ease;z-index:998;
+}
+.sidebar.open{left:0}
+.brand{font-weight:700;margin-bottom:14px;font-size:18px}
+.sidebar nav a{display:block;padding:10px 8px;color:#ddd;text-decoration:none;border-radius:6px;margin-bottom:6px}
+.sidebar nav a:hover{background:rgba(255,255,255,0.04);color:#fff}
+body.shift{margin-left:240px;transition:margin .25s ease}
