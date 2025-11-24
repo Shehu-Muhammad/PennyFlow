@@ -7,11 +7,15 @@ export function initRouter() {
       const html = await res.text();
       container.innerHTML = html;
 
-      // Load corresponding JS
-      const script = document.createElement('script');
-      script.src = `pages-js/${page}.js`;
-      script.type = 'module';
-      container.appendChild(script);
+      // Load corresponding JS dynamically (SPA-safe)
+      try {
+        const module = await import(`../pages-js/${page}.js`);
+        if (module.initSettings) module.initSettings(); // run page-specific init
+        if (module.initPage) module.initPage();         // generic function for other pages
+      } catch (err) {
+        console.warn(`No JS found for page: ${page}`);
+      }
+
     } catch (err) {
       container.innerHTML = `<h2>Page not found: ${page}</h2>`;
     }
@@ -25,11 +29,11 @@ export function initRouter() {
       history.pushState({}, '', `#${page}`);
       loadPage(page);
 
-    // Close sidebar and shift content
-    const sidebar = document.getElementById('sidebar');
-    const app = document.getElementById('app');
-    sidebar.classList.remove('open');
-    app.classList.remove('shifted');
+      // Close sidebar and shift content
+      const sidebar = document.getElementById('sidebar');
+      const app = document.getElementById('app');
+      sidebar.classList.remove('open');
+      app.classList.remove('shifted');
     }
   });
 
@@ -37,6 +41,7 @@ export function initRouter() {
   const hash = location.hash.replace('#', '') || 'income';
   loadPage(hash);
 
+  // Handle back/forward buttons
   window.addEventListener('popstate', () => {
     const page = location.hash.replace('#', '') || 'income';
     loadPage(page);
