@@ -24,6 +24,12 @@ export function initRouter() {
       const page = e.target.getAttribute('data-link');
       history.pushState({}, '', `#${page}`);
       loadPage(page);
+
+    // Close sidebar and shift content
+    const sidebar = document.getElementById('sidebar');
+    const app = document.getElementById('app');
+    sidebar.classList.remove('open');
+    app.classList.remove('shifted');
     }
   });
 

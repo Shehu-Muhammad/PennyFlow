@@ -1,17 +1,123 @@
+/* =========================
+   Base Styles
+========================= */
 body {
   font-family: Arial, sans-serif;
   background: #f4f4f4;
+  color: #000;
   margin: 0;
+  padding: 0;
+  display: flex; /* layout sidebar + content */
+}
+
+#app {
+  flex-grow: 1;
+  margin-left: 0;
+  padding: 80px 20px 20px 20px; /* top padding for controls */
+  transition: margin-left 0.3s ease;
+}
+
+/* =========================
+   Sidebar
+========================= */
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: -200px; /* hidden by default */
+  width: 200px;
+  height: 100%;
+  background: #222;
+  color: #fff;
   padding: 20px;
+  box-sizing: border-box;
+  transition: left 0.3s ease;
+  z-index: 1000;
 }
 
-h1, h2 {
-  margin-bottom: 20px;
-}
+#sidebar.open { left: 0; }
 
-button {
-  padding: 10px 14px;
+#sidebar ul { list-style: none; padding: 0; margin-top: 45px }
+#sidebar li { margin: 1rem 0; }
+#sidebar a { color: #fff; text-decoration: none; display: block; }
+
+/* shift content when sidebar is open */
+#app.shifted { margin-left: 200px; }
+
+/* =========================
+   Top Controls
+========================= */
+#menuBtn {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1100;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background-color: #0077ff;
+  color: #fff;
   border: none;
-  border-radius: 8px;
   cursor: pointer;
+}
+
+#darkModeToggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1100;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background-color: #0077ff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+/* =========================
+   Forms
+========================= */
+form input, form select, form button {
+  padding: 8px;
+  margin: 8px 0;
+  width: 100%;
+  max-width: 250px;
+  box-sizing: border-box;
+}
+
+button { border-radius: 6px; }
+
+/* =========================
+   Dark Mode
+========================= */
+body.dark {
+  background: #111;
+  color: #eee;
+}
+
+body.dark button {
+  background: #333;
+  color: #eee;
+}
+
+/* =========================
+   Loader & Canvas
+========================= */
+canvas {
+  max-width: 100%;
+  height: auto;
+  margin-top: 20px;
+}
+
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #000;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

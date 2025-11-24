@@ -1,9 +1,20 @@
-const sidebar = document.getElementById('menuBtn');
-const sidebarEl = document.getElementById('app-container') || document.getElementById('app');
+document.addEventListener('DOMContentLoaded', () => {
+  const menuBtn = document.getElementById('menuBtn');
+  const sidebar = document.getElementById('sidebar');
+  const app = document.getElementById('app');
 
-document.getElementById('menuBtn')?.addEventListener('click', () => {
-  const nav = document.getElementById('sidebar');
-  if (!nav) return;
+  if (!menuBtn || !sidebar || !app) return;
 
-  nav.classList.toggle('open');
+  menuBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    sidebar.classList.toggle('open');
+    app.classList.toggle('shifted', sidebar.classList.contains('open'));
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!sidebar.contains(e.target) && e.target !== menuBtn) {
+      sidebar.classList.remove('open');
+      app.classList.remove('shifted');
+    }
+  });
 });
