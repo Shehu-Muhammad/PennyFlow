@@ -3,18 +3,24 @@ export function initRouter() {
 
   async function loadPage(page) {
     try {
+      // Load page HTML
       const res = await fetch(`pages/${page}.html`);
       const html = await res.text();
       container.innerHTML = html;
 
-      // Load corresponding JS dynamically (SPA-safe)
-      try {
-        const module = await import(`../pages-js/${page}.js`);
-        if (module.initSettings) module.initSettings(); // run page-specific init
-        if (module.initPage) module.initPage();         // generic function for other pages
-      } catch (err) {
-        console.warn(`No JS found for page: ${page}`);
-      }
+// dynamically import JS after HTML is injected
+try {
+  const module = await import(`/pages-js/${page}.js`);
+
+  // call any init* function automatically
+  for (const key in module) {
+    if (typeof module[key] === 'function' && key.startsWith('init')) {
+      module[key]();
+    }
+  }
+} catch (err) {
+  console.warn(`No JS module for page: ${page}`);
+}
 
     } catch (err) {
       container.innerHTML = `<h2>Page not found: ${page}</h2>`;
@@ -32,8 +38,8 @@ export function initRouter() {
       // Close sidebar and shift content
       const sidebar = document.getElementById('sidebar');
       const app = document.getElementById('app');
-      sidebar.classList.remove('open');
-      app.classList.remove('shifted');
+      sidebar?.classList.remove('open');
+      app?.classList.remove('shifted');
     }
   });
 

@@ -1,4 +1,4 @@
-import { state, saveState } from '../state.js';
+import { state, saveState } from '../state';
 
 const form = document.getElementById('transactionEditForm');
 const params = new URLSearchParams(location.hash.split('?')[1]);
