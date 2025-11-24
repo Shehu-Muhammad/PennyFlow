@@ -1,7 +1,9 @@
-body.dark{
-  --bg:#0b0b0c;--card:#111;--text:#e8e8e8;--accent:#222;background:var(--bg);color:var(--text)
+body.dark {
+  background: #111;
+  color: #eee;
 }
-body.dark .card{background:var(--card)}
-body.dark input,body.dark select{background:#111;border:1px solid #222;color:#eee}
-body.dark .menu-btn, body.dark .dark-btn{background:#222}
-body.dark .sidebar{background:#0a0a0a;color:#eee}
+
+body.dark button {
+  background: #333;
+  color: #eee;
+}

@@ -1,18 +1,17 @@
-:root {
-  --bg:#f4f4f4; --card:#fff; --text:#111; --accent:#111;
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  margin: 0;
+  padding: 20px;
 }
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
-  background:var(--bg);color:var(--text);transition:background .2s,color .2s;padding-top:56px;
+
+h1, h2 {
+  margin-bottom: 20px;
 }
-#app{max-width:960px;margin:20px auto;padding:0 16px}
-.card{background:var(--card);padding:14px;border-radius:10px;margin-bottom:16px}
-.menu-btn,.dark-btn{position:fixed;top:10px;padding:8px;border-radius:8px;border:none;background:var(--accent);color:#fff;z-index:999}
-.menu-btn{left:10px}.dark-btn{right:10px}
-input,select{padding:10px;border-radius:8px;border:1px solid #ddd;width:100%;margin-bottom:10px}
-.small{font-size:13px;color:#666}
-.progress{width:100%;height:14px;background:#eee;border-radius:8px;overflow:hidden}
-.progress>i{display:block;height:100%;width:0%;background:green;transition:width .3s}
-@media(max-width:600px){#app{padding:0 12px}}
+
+button {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
