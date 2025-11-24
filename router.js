@@ -28,7 +28,7 @@ export function initRouter() {
   });
 
   // Initial load
-  const hash = location.hash.replace('#', '') || 'dashboard';
+  const hash = location.hash.replace('#', '') || 'income';
   loadPage(hash);
 
   window.addEventListener('popstate', () => {
