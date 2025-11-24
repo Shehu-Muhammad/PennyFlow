@@ -1,23 +1,25 @@
-import { state, saveState, loadCategories } from '../state.js';
+import { state, saveState } from '../state.js';
 
-async function populateBudgetForm() {
-  const categories = await loadCategories();
-  const select = document.getElementById('budgetCategory');
-  select.innerHTML = '';
-  categories.forEach(cat => {
-    const option = document.createElement('option');
-    option.value = cat;
-    option.textContent = cat;
-    select.appendChild(option);
+const form = document.getElementById('budgetForm');
+const list = document.getElementById('budgetList');
+
+function renderBudget() {
+  list.innerHTML = '';
+  state.budget.forEach((item, i) => {
+    const li = document.createElement('li');
+    li.textContent = `${item.category}: $${item.amount}`;
+    list.appendChild(li);
   });
 }
 
-populateBudgetForm();
-
-// Add budget logic as usual
-document.getElementById('addBudgetBtn').addEventListener('click', () => {
+form?.addEventListener('submit', e => {
+  e.preventDefault();
   const category = document.getElementById('budgetCategory').value;
   const amount = parseFloat(document.getElementById('budgetAmount').value);
   state.budget.push({ category, amount });
   saveState();
+  renderBudget();
+  form.reset();
 });
+
+renderBudget();

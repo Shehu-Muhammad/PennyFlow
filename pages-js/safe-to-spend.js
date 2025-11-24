@@ -1,4 +1,4 @@
-import { state } from '../js/state.js';
+import { state } from '../state.js';
 
 const display = document.getElementById('safeToSpendDisplay');
 

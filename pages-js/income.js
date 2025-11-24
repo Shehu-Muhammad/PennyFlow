@@ -1,4 +1,4 @@
-import { state, saveState } from '../js/state.js';
+import { state, saveState } from '../state.js';
 
 const form = document.getElementById('incomeForm');
 const list = document.getElementById('incomeList');

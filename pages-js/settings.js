@@ -1,4 +1,4 @@
-import { state, saveState } from '../js/state.js';
+import { state, saveState } from '../state.js';
 
 const darkToggle = document.getElementById('darkModeSetting');
 const clearBtn = document.getElementById('clearDataBtn');

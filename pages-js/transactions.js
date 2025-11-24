@@ -1,24 +1,32 @@
-import { state, saveState, loadCategories } from '../state.js';
+import { state, saveState } from '../state.js';
 
-async function populateTransactionForm() {
-  const categories = await loadCategories();
-  const select = document.getElementById('transactionCategory');
-  select.innerHTML = '';
-  categories.forEach(cat => {
-    const option = document.createElement('option');
-    option.value = cat;
-    option.textContent = cat;
-    select.appendChild(option);
+const form = document.getElementById('transactionForm');
+const list = document.getElementById('transactionList');
+
+function renderTransactions() {
+  list.innerHTML = '';
+  state.transactions.forEach((t, i) => {
+    const li = document.createElement('li');
+    li.textContent = `${t.name} - $${t.amount} (${t.category})`;
+    const editBtn = document.createElement('button');
+    editBtn.textContent = 'Edit';
+    editBtn.addEventListener('click', () => {
+      location.hash = `transactions-edit?id=${i}`;
+    });
+    li.appendChild(editBtn);
+    list.appendChild(li);
   });
 }
 
-populateTransactionForm();
-
-// Transaction form logic
-document.getElementById('addTransactionBtn').addEventListener('click', () => {
-  const category = document.getElementById('transactionCategory').value;
+form?.addEventListener('submit', e => {
+  e.preventDefault();
+  const name = document.getElementById('transactionName').value;
   const amount = parseFloat(document.getElementById('transactionAmount').value);
-  const description = document.getElementById('transactionDescription').value;
-  state.transactions.push({ category, amount, description });
+  const category = document.getElementById('transactionCategory').value;
+  state.transactions.push({ name, amount, category });
   saveState();
+  renderTransactions();
+  form.reset();
 });
+
+renderTransactions();
